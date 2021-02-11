@@ -58,7 +58,7 @@ defmodule Practice.Calc do
         if is_rator(token) do
           cond do
             stack == [] -> stack = [token | stack];
-                           #convertStack(tl exprlst, stack, output);
+                           convertStack(exprlst -- [hd exprlst], stack, output);
             stack != [] -> compari = compare(token, hd stack);
                case compari do
                  1 -> stack = [token | stack];
