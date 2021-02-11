@@ -1,7 +1,7 @@
 defmodule Practice.Factors do
   def factor(x) do
     num = x;
-    unless is_number(num) do
+    unless is_integer(num) do
       num = parse_int(x)
     end
     f(num, 2, [])
