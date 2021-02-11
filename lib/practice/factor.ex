@@ -4,7 +4,7 @@ defmodule Practice.Factors do
     unless is_number(x) do
       x = parse_int(x)
     end
-    IO.inspect(aGAIN)
+    IO.inspect("aGAIN")
     IO.inspect(is_number(x))
     f(x, 2, [])
     |> Enum.reverse
