@@ -18,7 +18,7 @@ defmodule PracticeWeb.PageController do
 
   def factor(conn, %{"x" => x}) do
     y = Practice.factor(x)
-    render conn, "factor.html", x: x, y: Enum.join(y, " ")
+    render conn, "factor.html", x: x, y: Enum.join(y, ", ")
   end
 
   def palindrome?(conn, %{"str" => str}) do
