@@ -45,6 +45,9 @@ defmodule Practice.Calc do
     cond do
       postfix == [] -> hd stack;
       postfix != [] ->
+      IO.inspect(0)
+      IO.inspect(postfix)
+      IO.inspect(stack)
           token = hd postfix;
           if Kernel.elem(token,0) == :num do
             stack = [token | stack];
