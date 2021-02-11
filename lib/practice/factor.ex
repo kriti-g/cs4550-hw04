@@ -1,5 +1,6 @@
 defmodule Practice.Factors do
   def factor(x) do
+    IO.inspect(is_number(x))
     unless is_number(x) do
       x = parse_int(x)
     end
