@@ -1,7 +1,13 @@
 defmodule Practice.Factors do
   def factor(x) do
+    x = parse_int(x);
     f(x, 2, [])
     |> Enum.reverse
+  end
+
+  def parse_int(text) do
+    {num, _} = Integer.parse(text)
+    num
   end
 
   def f(x, div, fs) do
