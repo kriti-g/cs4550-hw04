@@ -17,12 +17,10 @@ defmodule Practice.Calc do
   end
 
   def calc(expr) do
-    # This should handle +,-,*,/ with order of operations,
-    # but doesn't need to handle parens.
     expr
     |> String.split(~r/\s+/)
-    #|> Enum.map(tag_token)
-    #|> convert
+    |> Enum.map(tag_token)
+    # |> convert
     # |> reverse to prefix
     # |> evaluate as a stack calculator using pattern matching
   end
@@ -44,42 +42,4 @@ defmodule Practice.Calc do
     end
   end
 
-
-  def convert(exprlst) do
-    output = []
-    stack = []
-    output = convertStack(exprlst, stack, output)
-  end
-
-  def convertStack(exprlst, stack, output) do
-    cond do
-      exprlst == [] || stack == [] -> output
-      exprlst == [] -> output = output ++ [hd stack];
-                       stack = stack -- [hd stack];
-                       convertStack([], stack, output);
-      length(exprlst) != 0 ->
-        token = hd exprlst
-        if is_rator(token) do
-          if stack == [] do
-            stack = [token | stack]
-          else
-            compari = compare(token, hd stack)
-            case compari do
-              1 -> stack = [token | stack];
-                   convertStack(tl exprlst, stack, output);
-              0 -> output = output ++ [hd stack];
-                   stack = stack -- [hd stack];
-                   stack = [token | stack];
-                   convertStack(tl exprlst, stack, output);
-              -1 -> output = output ++ [hd stack];
-                    stack = stack -- [hd stack];
-                    convertStack(exprlst, stack, output);
-            end
-          end
-        else
-          output = output ++ token
-          convertStack(tl exprlst, stack, output);
-        end
-      end
-    end
 end
