@@ -3,9 +3,11 @@ defmodule Practice.Factors do
     if is_integer(x) do
       f(x, 2, [])
       |> Enum.reverse
+      |> to_string
     else
       f(parse_int(x), 2, [])
       |> Enum.reverse
+      |> to_string
     end
   end
 
