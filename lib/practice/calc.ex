@@ -78,5 +78,4 @@ defmodule Practice.Calc do
         end
       end
     end
-  end
 end
