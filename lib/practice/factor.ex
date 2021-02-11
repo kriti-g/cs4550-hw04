@@ -1,12 +1,13 @@
 defmodule Practice.Factors do
   def factor(x) do
+    num = x;
     IO.inspect(is_number(x))
     unless is_number(x) do
-      x = parse_int(x)
+      num = parse_int(x)
     end
     IO.inspect("aGAIN")
     IO.inspect(is_number(x))
-    f(x, 2, [])
+    f(num, 2, [])
     |> Enum.reverse
   end
 
