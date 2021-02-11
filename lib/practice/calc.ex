@@ -31,7 +31,7 @@ defmodule Practice.Calc do
     output = []
     stack = []
 
-    defp process(token) do
+    process = fn (token) ->
       if is_rator(token) do
         if stack == [] do
           [token | stack]
