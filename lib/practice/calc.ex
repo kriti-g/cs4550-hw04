@@ -16,8 +16,7 @@ defmodule Practice.Calc do
     |> String.split(~r/\s+/)
     |> Enum.map(tag_token)
     |> convert
-    # |> reverse to prefix
-    # |> evaluate as a stack calculator using pattern matching
+    |> solve
   end
 
   def compare(token1, token2) do
@@ -37,7 +36,45 @@ defmodule Practice.Calc do
     end
   end
 
+  def solve(postfix) do
+    stack = []
+    solution = solveStack(postfix, stack)
+  end
 
+  def solveStack(postfix, stack) do
+    cond do
+      expression == [] -> hd stack;
+      expression != [] ->
+          token = hd postfix;
+          if Kernel.elem(token,0) == :num do
+            stack = [token | stack];
+            postfix = tl postfix;
+            solveStack(postfix, stack);
+          else
+            num1 = hd stack;
+            stack = tl stack;
+            num2 = hd stack;
+            stack = tl stack;
+            op = hd postfix;
+            postfix = tl postfix;
+            result = evaluate(num1, num2, op);
+            stack = [result | stack];
+            solveStack(postfix, stack);
+          end
+    end
+  end
+
+  def evaluate(num1, num2, op) do
+    op = Kernel.elem(op, 1);
+    num1 = Kernel.elem(num1, 1);
+    num2 = Kernel.elem(num2, 1);
+    case op do
+      "*" -> num1 * num2;
+      "/" -> num1 / num2;
+      "+" -> num1 + num2;
+      "-" -> num1 - num2;
+    end
+  end
 
   def convert(exprlst) do
     output = []
@@ -50,7 +87,6 @@ defmodule Practice.Calc do
       exprlst == [] && stack == [] -> output;
       exprlst == [] -> output = output ++ [hd stack];
                        stack = stack -- [hd stack];
-                       IO.puts "2";
                        convertStack([], stack, output);
       exprlst != [] ->
         token = hd exprlst;
@@ -58,30 +94,22 @@ defmodule Practice.Calc do
         if Kernel.elem(token,0) == :op do
           cond do
             stack == [] -> stack = [token | stack];
-                           IO.puts "3";
-                           convertStack(rest, stack, output);
+               convertStack(rest, stack, output);
             stack != [] -> compari = compare(token, hd stack);
                case compari do
                  1 -> stack = [token | stack];
-                 IO.puts "3";
                       convertStack(rest, stack, output);
                  0 -> output = output ++ [hd stack];
-                      stack = stack -- [hd stack];
+                      stack = tl stack;
                       stack = [token | stack];
-                      IO.puts "4";
                       convertStack(rest, stack, output);
                  -1 -> output = output ++ [hd stack];
-                       stack = tl stack;
-                       IO.puts "5";
-                       convertStack(exprlst, stack, output);
+                      stack = tl stack;
+                      convertStack(exprlst, stack, output);
                end
           end
         else
           output = output ++ [token]
-          IO.puts "6";
-          IO.inspect(stack)
-          IO.inspect(exprlst)
-          IO.inspect(output)
           convertStack(rest, stack, output);
         end
       end
