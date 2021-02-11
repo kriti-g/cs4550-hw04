@@ -68,10 +68,10 @@ defmodule Practice.Calc do
   def evaluate(num1, num2, op) do
     op = Kernel.elem(op, 1);
     case op do
-      "*" -> num1 * num2;
+      "*" -> num2 * num1;
       "/" -> num2 / num1;
-      "+" -> num1 + num2;
-      "-" -> num1 - num2;
+      "+" -> num2 + num1;
+      "-" -> num2 - num1;
     end
   end
 
