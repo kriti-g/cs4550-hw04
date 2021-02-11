@@ -1,4 +1,4 @@
-defmodule Practice.Factor do
+defmodule Practice.Factors do
   def factor(x) do
     f(x, 2, [])
     |> Enum.reverse
