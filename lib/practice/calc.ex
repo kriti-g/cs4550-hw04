@@ -4,6 +4,18 @@ defmodule Practice.Calc do
     num
   end
 
+  def is_rator(token) do
+    token == "+" || token == "-" || token == "/" || token == "*"
+  end
+
+  def tag_token(token) do
+    if is_rator(token) do
+      {:op, token}
+    else
+      {:num, parse_float(token)}
+    end
+  end
+
   def calc(expr) do
     # This should handle +,-,*,/ with order of operations,
     # but doesn't need to handle parens.
@@ -15,17 +27,27 @@ defmodule Practice.Calc do
     # |> evaluate as a stack calculator using pattern matching
   end
 
-  def tag_token(token) do
-    if is_rator(token) do
-      {:op, token}
+  def compare(token1, token2) do
+    convert = fn(tk) ->
+      if tk == "*" || tk == "/" do
+        2
+      else
+        1
+      end
+    end
+    num1 = convert.(token1)
+    num2 = convert.(token2)
+    if num1 < num2 do
+      -1
     else
-      {:num, parse_float(token)}
+      if num1 == num2 do
+        0
+      else
+        1
+      end
     end
   end
 
-  def is_rator(token) do
-    token == "+" || token == "-" || token == "/" || token == "*"
-  end
 
   def convert(exprlst) do
     output = []
@@ -50,6 +72,7 @@ defmodule Practice.Calc do
 
     Enum.each(exprlst, process(token))
     Enum.each(stack, fn(token) -> output = output ++ [hd stack]; stack = stack -- [hd stack]; end)
-
   end
+
+
 end
