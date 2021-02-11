@@ -59,6 +59,18 @@ defmodule Practice.Calc do
           cond do
             stack == [] -> stack = [token | stack];
                            #convertStack(tl exprlst, stack, output);
+            stack != [] -> compari = compare(token, hd stack);
+               case compari do
+                 1 -> stack = [token | stack];
+                      #convertStack(tl exprlst, stack, output);
+                 0 -> output = output ++ [hd stack];
+                      stack = stack -- [hd stack];
+                      stack = [token | stack];
+                      #convertStack(tl exprlst, stack, output);
+                 -1 -> output = output ++ [hd stack];
+                       stack = stack -- [hd stack];
+                      # convertStack(exprlst, stack, output);
+               end
           end
         else
           output = output ++ token
