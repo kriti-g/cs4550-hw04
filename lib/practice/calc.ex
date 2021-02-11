@@ -45,17 +45,11 @@ defmodule Practice.Calc do
     cond do
       postfix == [] -> hd stack;
       postfix != [] ->
-      IO.inspect(0)
-      IO.inspect(postfix)
-      IO.inspect(stack)
           token = hd postfix;
           if Kernel.elem(token,0) == :num do
             token = Kernel.elem(token, 1);
             stack = [token | stack];
             postfix = tl postfix;
-            IO.inspect(1)
-            IO.inspect(postfix)
-            IO.inspect(stack)
             solveStack(postfix, stack);
           else
             num1 = hd stack;
@@ -66,9 +60,6 @@ defmodule Practice.Calc do
             postfix = tl postfix;
             result = evaluate(num1, num2, op);
             stack = [result | stack];
-            IO.inspect(2)
-            IO.inspect(postfix)
-            IO.inspect(stack)
             solveStack(postfix, stack);
           end
     end
