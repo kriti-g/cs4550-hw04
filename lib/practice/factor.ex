@@ -13,7 +13,7 @@ defmodule Practice.Factors do
     num
   end
 
-  def f(num, div, fs) do
+  def f(num, div, fs) when is_integer(num) do
     res = div(num, div);
     re = rem(num, div);
     cond do
