@@ -49,17 +49,17 @@ defmodule Practice.Calc do
 
   def convertStack(exprlst, stack, output) do
     cond do
-      exprlst == [] || stack == [] -> output;
+      exprlst == [] && stack == [] -> output;
       exprlst == [] -> output = output ++ [hd stack];
                        stack = stack -- [hd stack];
                        convertStack([], stack, output);
       exprlst != [] ->
         token = hd exprlst;
         if is_rator(token) do
-          if stack == [] do
-            stack = [token | stack]
-          else
-            compari = compare(token, hd stack)
+          cond do
+            stack == [] -> stack = [token | stack];
+                           convertStack(tl exprlst, stack, output);
+            stack != [] -> compari = compare(token, hd stack);
             case compari do
               1 -> stack = [token | stack];
                    convertStack(tl exprlst, stack, output);
