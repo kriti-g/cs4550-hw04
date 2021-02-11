@@ -1,6 +1,7 @@
 defmodule Practice.Factors do
   def factor(x) do
     f(x, 2, [])
+    |> Enum.reverse
   end
 
   def f(x, div, fs) do
