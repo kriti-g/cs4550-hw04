@@ -50,6 +50,9 @@ defmodule Practice.Calc do
             stack = [token | stack];
             postfix = tl postfix;
             solveStack(postfix, stack);
+            IO.inspect(1)
+            IO.inspect(postfix)
+            IO.inspect(stack)
           else
             num1 = hd stack;
             stack = tl stack;
@@ -59,6 +62,7 @@ defmodule Practice.Calc do
             postfix = tl postfix;
             result = evaluate(num1, num2, op);
             stack = [result | stack];
+            IO.inspect(2)
             IO.inspect(postfix)
             IO.inspect(stack)
             solveStack(postfix, stack);
