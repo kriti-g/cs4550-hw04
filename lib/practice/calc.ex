@@ -73,6 +73,4 @@ defmodule Practice.Calc do
     Enum.each(exprlst, process.(token))
     Enum.each(stack, fn(token) -> output = output ++ [hd stack]; stack = stack -- [hd stack]; end)
   end
-
-
 end
