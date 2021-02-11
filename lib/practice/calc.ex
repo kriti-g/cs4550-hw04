@@ -69,7 +69,7 @@ defmodule Practice.Calc do
     op = Kernel.elem(op, 1);
     case op do
       "*" -> num1 * num2;
-      "/" -> num1 / num2;
+      "/" -> num2 / num1;
       "+" -> num1 + num2;
       "-" -> num1 - num2;
     end
