@@ -37,14 +37,10 @@ defmodule Practice.Calc do
     end
     num1 = convert.(token1)
     num2 = convert.(token2)
-    if num1 < num2 do
-      -1
-    else
-      if num1 == num2 do
-        0
-      else
-        1
-      end
+    cond do
+      num1 < num2 -> -1
+      num1 == num2 -> 0
+      num1 > num2 -> 1
     end
   end
 
@@ -54,6 +50,7 @@ defmodule Practice.Calc do
     stack = []
 
     process = fn (token) ->
+
       if is_rator(token) do
         if stack == [] do
           [token | stack]
@@ -69,7 +66,6 @@ defmodule Practice.Calc do
         output ++ token
       end
     end
-
     Enum.each(exprlst, process.(token))
     Enum.each(stack, fn(token) -> output = output ++ [hd stack]; stack = stack -- [hd stack]; end)
   end
