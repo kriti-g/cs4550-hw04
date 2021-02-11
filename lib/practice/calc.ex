@@ -50,23 +50,24 @@ defmodule Practice.Calc do
     stack = []
 
     process = fn (token) ->
-
       if is_rator(token) do
         if stack == [] do
-          [token | stack]
+          stack = [token | stack]
         else
           compari = compare(token, hd stack)
           case compari do
             1 -> [token | stack]
-            0 -> output = output ++ [hd stack]; stack = stack -- [hd stack]; [token | stack];
-            -1 -> output = output ++ [hd stack]; stack = stack -- [hd stack]; [token | stack]; process(token);
+            0 -> output = output ++ [hd stack]; stack = stack -- [hd stack]; stack = [token | stack];
+            -1 -> output = output ++ [hd stack]; stack = stack -- [hd stack]; process.(token);
           end
         end
       else
         output ++ token
       end
     end
+
     Enum.each(exprlst, process.(token))
     Enum.each(stack, fn(token) -> output = output ++ [hd stack]; stack = stack -- [hd stack]; end)
   end
+  
 end
