@@ -4,6 +4,6 @@
     <h2>Factor Results</h2>
 
     <p>x = <%= @x %></p>
-    <p><%= @y %></p>
+    <p>results = <%= @y %></p>
   </div>
 </div>
