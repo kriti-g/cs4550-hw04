@@ -1,6 +1,5 @@
 defmodule Practice.Factors do
   def factor(x) do
-    x = parse_int(x);
     f(x, 2, [])
     |> Enum.reverse
   end
