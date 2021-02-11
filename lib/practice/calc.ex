@@ -64,14 +64,14 @@ defmodule Practice.Calc do
                case compari do
                  1 -> stack = [token | stack];
                  IO.puts "3";
-                      convertStack(exprlst -- [hd exprlst], stack, output);
+                      convertStack(rest, stack, output);
                  0 -> output = output ++ [hd stack];
                       stack = stack -- [hd stack];
                       stack = [token | stack];
                       IO.puts "4";
-                      convertStack(exprlst -- [hd exprlst], stack, output);
+                      convertStack(rest, stack, output);
                  -1 -> output = output ++ [hd stack];
-                       stack = stack -- [hd stack];
+                       stack = tl stack;
                        IO.puts "5";
                        convertStack(exprlst, stack, output);
                end
@@ -82,7 +82,7 @@ defmodule Practice.Calc do
           IO.inspect(stack)
           IO.inspect(exprlst)
           IO.inspect(output)
-          convertStack(exprlst -- [hd exprlst], stack, output);
+          convertStack(rest, stack, output);
         end
       end
     end
