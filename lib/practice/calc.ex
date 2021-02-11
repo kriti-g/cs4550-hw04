@@ -49,7 +49,7 @@ defmodule Practice.Calc do
 
   def convertStack(exprlst, stack, output) do
     cond do
-      exprlst == [] && stack == [] -> output; IO.puts "1";
+      exprlst == [] && stack == [] -> output;
       exprlst == [] -> output = output ++ [hd stack];
                        stack = stack -- [hd stack];
                        IO.puts "2";
