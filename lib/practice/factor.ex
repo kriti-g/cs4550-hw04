@@ -1,11 +1,12 @@
 defmodule Practice.Factors do
   def factor(x) do
-    num = x;
-    unless is_integer(num) do
-      num = parse_int(x)
+    if is_integer(num) do
+      f(x, 2, [])
+      |> Enum.reverse
+    else
+      f(parse_int(x), 2, [])
+      |> Enum.reverse
     end
-    f(num, 2, [])
-    |> Enum.reverse
   end
 
   def parse_int(text) do
