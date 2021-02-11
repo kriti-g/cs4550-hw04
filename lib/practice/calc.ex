@@ -49,32 +49,38 @@ defmodule Practice.Calc do
 
   def convertStack(exprlst, stack, output) do
     cond do
-      exprlst == [] && stack == [] -> output;
+      exprlst == [] && stack == [] -> output; IO.puts "1";
       exprlst == [] -> output = output ++ [hd stack];
                        stack = stack -- [hd stack];
+                       IO.puts "2";
                        convertStack([], stack, output);
       exprlst != [] ->
         token = hd exprlst;
         if is_rator(token) do
           cond do
             stack == [] -> stack = [token | stack];
+                           IO.puts "3";
                            convertStack(exprlst -- [hd exprlst], stack, output);
             stack != [] -> compari = compare(token, hd stack);
                case compari do
                  1 -> stack = [token | stack];
+                 IO.puts "3";
                       convertStack(exprlst -- [hd exprlst], stack, output);
                  0 -> output = output ++ [hd stack];
                       stack = stack -- [hd stack];
                       stack = [token | stack];
+                      IO.puts "4";
                       convertStack(exprlst -- [hd exprlst], stack, output);
                  -1 -> output = output ++ [hd stack];
                        stack = stack -- [hd stack];
+                       IO.puts "5";
                        convertStack(exprlst, stack, output);
                end
           end
         else
           output = output ++ token
-          #convertStack(exprlst -- [hd exprlst], stack, output);
+          IO.puts "6";
+          convertStack(exprlst -- [hd exprlst], stack, output);
         end
       end
     end
