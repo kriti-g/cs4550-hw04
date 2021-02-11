@@ -32,8 +32,8 @@ defmodule Practice.Calc do
         1
       end
     end
-    num1 = convert.(token1)
-    num2 = convert.(token2)
+    num1 = convert.(Kernel.elem(token1, 1))
+    num2 = convert.(Kernel.elem(token2, 1))
     cond do
       num1 < num2 -> -1
       num1 == num2 -> 0
@@ -59,7 +59,7 @@ defmodule Practice.Calc do
           cond do
             stack == [] -> stack = [token | stack];
                            convertStack(exprlst -- [hd exprlst], stack, output);
-            stack != [] -> compari = compare(Kernel.elem(token, 1), Kernel.elem(hd stack, 1));
+            stack != [] -> compari = compare(token, hd stack);
                case compari do
                  1 -> stack = [token | stack];
                       convertStack(exprlst -- [hd exprlst], stack, output);
@@ -74,7 +74,7 @@ defmodule Practice.Calc do
           end
         else
           output = output ++ token
-          convertStack(exprlst -- [hd exprlst], stack, output);
+          #convertStack(exprlst -- [hd exprlst], stack, output);
         end
       end
     end
