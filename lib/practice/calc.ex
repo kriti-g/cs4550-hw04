@@ -4,6 +4,15 @@ defmodule Practice.Calc do
     num
   end
 
+  def calc(expr) do
+    expr
+    |> String.split(~r/\s+/)
+    |> Enum.map(tag_token())
+    # |> convert
+    # |> reverse to prefix
+    # |> evaluate as a stack calculator using pattern matching
+  end
+
   def is_rator(token) do
     token == "+" || token == "-" || token == "/" || token == "*"
   end
@@ -14,15 +23,6 @@ defmodule Practice.Calc do
     else
       {:num, parse_float(token)}
     end
-  end
-
-  def calc(expr) do
-    expr
-    |> String.split(~r/\s+/)
-    |> Enum.map(tag_token())
-    # |> convert
-    # |> reverse to prefix
-    # |> evaluate as a stack calculator using pattern matching
   end
 
   def compare(token1, token2) do
