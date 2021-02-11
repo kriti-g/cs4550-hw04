@@ -74,7 +74,7 @@ defmodule Practice.Calc do
           end
         else
           output = output ++ token
-          #convertStack(tl exprlst, stack, output);
+          convertStack(exprlst -- [hd exprlst], stack, output);
         end
       end
     end
