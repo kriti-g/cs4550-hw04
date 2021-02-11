@@ -80,6 +80,9 @@ defmodule Practice.Calc do
         else
           output = output ++ token
           IO.puts "6";
+          IO.inspect(stack)
+          IO.inspect(exprlst)
+          IO.inspect(output)
           convertStack(exprlst -- [hd exprlst], stack, output);
         end
       end
