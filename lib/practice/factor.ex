@@ -17,5 +17,4 @@ defmodule Practice.Factors do
       true -> fs
     end
   end
-
 end
