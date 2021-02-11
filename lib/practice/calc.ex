@@ -43,8 +43,8 @@ defmodule Practice.Calc do
 
   def solveStack(postfix, stack) do
     cond do
-      expression == [] -> hd stack;
-      expression != [] ->
+      postfix == [] -> hd stack;
+      postfix != [] ->
           token = hd postfix;
           if Kernel.elem(token,0) == :num do
             stack = [token | stack];
