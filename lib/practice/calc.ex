@@ -7,7 +7,7 @@ defmodule Practice.Calc do
   def calc(expr) do
     expr
     |> String.split(~r/\s+/)
-    |> Enum.map(tag_token)
+    |> Enum.map(tag_token(token))
     # |> convert
     # |> reverse to prefix
     # |> evaluate as a stack calculator using pattern matching
