@@ -1,10 +1,8 @@
 defmodule Practice.Factors do
   def factor(x) do
     num = x;
-    unless is_number(x) do
+    unless is_number(num) do
       num = parse_int(x)
-      IO.inspect(num)
-      IO.inspect(is_number(num))
     end
     f(num, 2, [])
     |> Enum.reverse
@@ -15,12 +13,12 @@ defmodule Practice.Factors do
     num
   end
 
-  def f(x, div, fs) do
-    res = div(x, div);
-    re = rem(x, div);
+  def f(num, div, fs) do
+    res = div(num, div);
+    re = rem(num, div);
     cond do
       re === 0 -> f(res, div, [div | fs])
-      x > 1 -> f(x, div + 1, fs)
+      num > 1 -> f(num, div + 1, fs)
       true -> fs
     end
   end
