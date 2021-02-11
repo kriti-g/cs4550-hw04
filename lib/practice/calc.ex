@@ -56,7 +56,7 @@ defmodule Practice.Calc do
                        convertStack([], stack, output);
       exprlst != [] ->
         token = hd exprlst;
-        if is_rator(token) do
+        if Kernel.elem(token,0) == :op do
           cond do
             stack == [] -> stack = [token | stack];
                            IO.puts "3";
