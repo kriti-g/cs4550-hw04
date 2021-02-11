@@ -1,9 +1,13 @@
 defmodule Practice.Factors do
   def factor(x) do
+    x = parse_float(x)
     f(x, 2, [])
     |> Enum.reverse
   end
-
+  def parse_float(text) do
+    {num, _} = Float.parse(text)
+    num
+  end
   def f(x, div, fs) do
     res = div(x, div);
     re = rem(x, div);
