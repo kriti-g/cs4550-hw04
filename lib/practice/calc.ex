@@ -50,6 +50,7 @@ defmodule Practice.Calc do
       IO.inspect(stack)
           token = hd postfix;
           if Kernel.elem(token,0) == :num do
+            token = Kernel.elem(token, 1);
             stack = [token | stack];
             postfix = tl postfix;
             IO.inspect(1)
@@ -75,8 +76,6 @@ defmodule Practice.Calc do
 
   def evaluate(num1, num2, op) do
     op = Kernel.elem(op, 1);
-    num1 = Kernel.elem(num1, 1);
-    num2 = Kernel.elem(num2, 1);
     case op do
       "*" -> num1 * num2;
       "/" -> num1 / num2;
