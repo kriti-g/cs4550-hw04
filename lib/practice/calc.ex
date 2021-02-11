@@ -52,10 +52,10 @@ defmodule Practice.Calc do
           if Kernel.elem(token,0) == :num do
             stack = [token | stack];
             postfix = tl postfix;
-            solveStack(postfix, stack);
             IO.inspect(1)
             IO.inspect(postfix)
             IO.inspect(stack)
+            solveStack(postfix, stack);
           else
             num1 = hd stack;
             stack = tl stack;
