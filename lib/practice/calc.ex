@@ -59,7 +59,7 @@ defmodule Practice.Calc do
           cond do
             stack == [] -> stack = [token | stack];
                            convertStack(exprlst -- [hd exprlst], stack, output);
-            stack != [] -> compari = compare(token, hd stack);
+            stack != [] -> compari = compare(Kernel.elem(token, 1), Kernel.elem(hd stack, 1));
                case compari do
                  1 -> stack = [token | stack];
                       convertStack(exprlst -- [hd exprlst], stack, output);
