@@ -21,8 +21,8 @@ defmodule Practice.Calc do
     # but doesn't need to handle parens.
     expr
     |> String.split(~r/\s+/)
-    |> Enum.map(tag_token)
-    |> convert
+    #|> Enum.map(tag_token)
+    #|> convert
     # |> reverse to prefix
     # |> evaluate as a stack calculator using pattern matching
   end
