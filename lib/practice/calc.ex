@@ -78,7 +78,7 @@ defmodule Practice.Calc do
                end
           end
         else
-          output = output ++ token
+          output = output ++ [token]
           IO.puts "6";
           IO.inspect(stack)
           IO.inspect(exprlst)
