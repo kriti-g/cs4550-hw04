@@ -4,7 +4,7 @@ defmodule Practice.Factors do
     |> Enum.reverse
   end
 
-  def f(x, div fs) do
+  def f(x, div, fs) do
     res = div(x, div);
     re = rem(x, div);
     cond do
