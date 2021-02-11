@@ -1,6 +1,6 @@
 defmodule Practice.Factors do
   def factor(x) do
-    if is_integer(num) do
+    if is_integer(x) do
       f(x, 2, [])
       |> Enum.reverse
     else
