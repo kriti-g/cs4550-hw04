@@ -5,8 +5,10 @@ defmodule Practice.Factor do
   end
 
   def f(x, div fs) do
+    res = div(x, div);
+    re = rem(x, div);
     cond do
-      rem(x, div) === 0 -> f(div(x, div), div, [div | fs])
+      re === 0 -> f(res, div, [div | fs])
       x > 1 -> f(x, div + 1, fs)
       true -> fs
     end
