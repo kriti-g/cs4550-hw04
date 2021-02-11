@@ -1,6 +1,6 @@
 defmodule Practice.Factors do
   def factor(x) do
-    if is_bitstring(x) do
+    unless is_number(x) do
       x = parse_int(x)
     end
     f(x, 2, [])
