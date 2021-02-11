@@ -96,6 +96,10 @@ defmodule Practice.Calc do
       exprlst == [] && stack == [] -> output;
       exprlst == [] -> output = output ++ [hd stack];
                        stack = stack -- [hd stack];
+                       IO.inspect(1)
+                       IO.inspect(exprlst)
+                       IO.inspect(stack)
+                       IO.inspect(output)
                        convertStack([], stack, output);
       exprlst != [] ->
         token = hd exprlst;
@@ -103,22 +107,42 @@ defmodule Practice.Calc do
         if Kernel.elem(token,0) == :op do
           cond do
             stack == [] -> stack = [token | stack];
+            IO.inspect(2)
+            IO.inspect(exprlst)
+            IO.inspect(stack)
+            IO.inspect(output)
                convertStack(rest, stack, output);
             stack != [] -> compari = compare(token, hd stack);
                case compari do
                  1 -> stack = [token | stack];
                       convertStack(rest, stack, output);
+                      IO.inspect(3)
+                      IO.inspect(exprlst)
+                      IO.inspect(stack)
+                      IO.inspect(output)
                  0 -> output = output ++ [hd stack];
                       stack = tl stack;
                       stack = [token | stack];
+                      IO.inspect(4)
+                      IO.inspect(exprlst)
+                      IO.inspect(stack)
+                      IO.inspect(output)
                       convertStack(rest, stack, output);
                  -1 -> output = output ++ [hd stack];
                       stack = tl stack;
+                      IO.inspect(5)
+                      IO.inspect(exprlst)
+                      IO.inspect(stack)
+                      IO.inspect(output)
                       convertStack(exprlst, stack, output);
                end
           end
         else
           output = output ++ [token]
+          IO.inspect(6)
+          IO.inspect(exprlst)
+          IO.inspect(stack)
+          IO.inspect(output)
           convertStack(rest, stack, output);
         end
       end
