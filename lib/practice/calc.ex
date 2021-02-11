@@ -16,7 +16,7 @@ defmodule Practice.Calc do
     |> String.split(~r/\s+/)
     |> Enum.map(tag_token)
     |> convert
-    |> solve
+    #|> solve
   end
 
   def compare(token1, token2) do
