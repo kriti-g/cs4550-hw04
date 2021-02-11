@@ -58,11 +58,11 @@ defmodule Practice.Calc do
         if is_rator(token) do
           cond do
             stack == [] -> stack = [token | stack];
-                           convertStack(tl exprlst, stack, output);
+                           #convertStack(tl exprlst, stack, output);
           end
         else
           output = output ++ token
-          convertStack(tl exprlst, stack, output);
+          #convertStack(tl exprlst, stack, output);
         end
       end
     end
