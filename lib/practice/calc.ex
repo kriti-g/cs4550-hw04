@@ -6,7 +6,7 @@ defmodule Practice.Calc do
 
   def calc(expr) do
     tag_token = fn(token) ->
-      if is_rator(token) do
+      if token == "+" || token == "-" || token == "/" || token == "*" do
         {:op, token}
       else
         {:num, parse_float(token)}
@@ -15,13 +15,9 @@ defmodule Practice.Calc do
     expr
     |> String.split(~r/\s+/)
     |> Enum.map(tag_token)
-    # |> convert
+    |> convert
     # |> reverse to prefix
     # |> evaluate as a stack calculator using pattern matching
-  end
-
-  def is_rator(token) do
-    token == "+" || token == "-" || token == "/" || token == "*"
   end
 
   def compare(token1, token2) do
@@ -41,6 +37,8 @@ defmodule Practice.Calc do
     end
   end
 
+
+
   def convert(exprlst) do
     output = []
     stack = []
@@ -56,11 +54,12 @@ defmodule Practice.Calc do
                        convertStack([], stack, output);
       exprlst != [] ->
         token = hd exprlst;
+        rest = tl exprlst;
         if Kernel.elem(token,0) == :op do
           cond do
             stack == [] -> stack = [token | stack];
                            IO.puts "3";
-                           convertStack(exprlst -- [hd exprlst], stack, output);
+                           convertStack(rest, stack, output);
             stack != [] -> compari = compare(token, hd stack);
                case compari do
                  1 -> stack = [token | stack];
