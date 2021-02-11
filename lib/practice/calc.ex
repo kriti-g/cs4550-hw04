@@ -53,30 +53,5 @@ defmodule Practice.Calc do
       exprlst == [] -> output = output ++ [hd stack];
                        stack = stack -- [hd stack];
                        convertStack([], stack, output);
-      length(exprlst) != 0 ->
-        token = hd exprlst
-        if is_rator(token) do
-          if stack == [] do
-            stack = [token | stack]
-          else
-            compari = compare(token, hd stack)
-            case compari do
-              1 -> stack = [token | stack];
-                   convertStack(tl exprlst, stack, output);
-              0 -> output = output ++ [hd stack];
-                   stack = stack -- [hd stack];
-                   stack = [token | stack];
-                   convertStack(tl exprlst, stack, output);
-              -1 -> output = output ++ [hd stack];
-                    stack = stack -- [hd stack];
-                    convertStack(exprlst, stack, output);
-            end
-          end
-        else
-          output = output ++ token
-          convertStack(tl exprlst, stack, output);
-        end
-      end
     end
-
 end
