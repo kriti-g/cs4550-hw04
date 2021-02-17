@@ -45,72 +45,72 @@ defmodule Practice.Calc do
     cond do
       postfix == [] -> hd stack;
       postfix != [] ->
-          token = hd postfix;
-          if Kernel.elem(token,0) == :num do
-            token = Kernel.elem(token, 1);
-            stack = [token | stack];
-            postfix = tl postfix;
-            solveStack(postfix, stack);
-          else
-            num1 = hd stack;
-            stack = tl stack;
-            num2 = hd stack;
-            stack = tl stack;
-            op = hd postfix;
-            postfix = tl postfix;
-            result = evaluate(num1, num2, op);
-            stack = [result | stack];
-            solveStack(postfix, stack);
-          end
-    end
-  end
-
-  def evaluate(num1, num2, op) do
-    op = Kernel.elem(op, 1);
-    case op do
-      "*" -> num2 * num1;
-      "/" -> num2 / num1;
-      "+" -> num2 + num1;
-      "-" -> num2 - num1;
-    end
-  end
-
-  def convert(exprlst) do
-    output = []
-    stack = []
-    output = convertStack(exprlst, stack, output)
-  end
-
-  def convertStack(exprlst, stack, output) do
-    cond do
-      exprlst == [] && stack == [] -> output;
-      exprlst == [] -> output = output ++ [hd stack];
-                       stack = stack -- [hd stack];
-                       convertStack([], stack, output);
-      exprlst != [] ->
-        token = hd exprlst;
-        rest = tl exprlst;
-        if Kernel.elem(token,0) == :op do
-          cond do
-            stack == [] -> stack = [token | stack];
-               convertStack(rest, stack, output);
-            stack != [] -> compari = compare(token, hd stack);
-               case compari do
-                 1 -> stack = [token | stack];
-                      convertStack(rest, stack, output);
-                 0 -> output = output ++ [hd stack];
-                      stack = tl stack;
-                      stack = [token | stack];
-                      convertStack(rest, stack, output);
-                 -1 -> output = output ++ [hd stack];
-                      stack = tl stack;
-                      convertStack(exprlst, stack, output);
-               end
-          end
+        token = hd postfix;
+        if Kernel.elem(token,0) == :num do
+          token = Kernel.elem(token, 1);
+          stack = [token | stack];
+          postfix = tl postfix;
+          solveStack(postfix, stack);
         else
-          output = output ++ [token]
-          convertStack(rest, stack, output);
+          num1 = hd stack;
+          stack = tl stack;
+          num2 = hd stack;
+          stack = tl stack;
+          op = hd postfix;
+          postfix = tl postfix;
+          result = evaluate(num1, num2, op);
+          stack = [result | stack];
+          solveStack(postfix, stack);
         end
       end
     end
-end
+
+    def evaluate(num1, num2, op) do
+      op = Kernel.elem(op, 1);
+      case op do
+        "*" -> num2 * num1;
+        "/" -> num2 / num1;
+        "+" -> num2 + num1;
+        "-" -> num2 - num1;
+      end
+    end
+
+    def convert(exprlst) do
+      output = []
+      stack = []
+      output = convertStack(exprlst, stack, output)
+    end
+
+    def convertStack(exprlst, stack, output) do
+      cond do
+        exprlst == [] && stack == [] -> output;
+        exprlst == [] -> output = output ++ [hd stack];
+        stack = stack -- [hd stack];
+        convertStack([], stack, output);
+        exprlst != [] ->
+          token = hd exprlst;
+          rest = tl exprlst;
+          if Kernel.elem(token,0) == :op do
+            cond do
+              stack == [] -> stack = [token | stack];
+              convertStack(rest, stack, output);
+              stack != [] -> compari = compare(token, hd stack);
+              case compari do
+                1 -> stack = [token | stack];
+                convertStack(rest, stack, output);
+                0 -> output = output ++ [hd stack];
+                stack = tl stack;
+                stack = [token | stack];
+                convertStack(rest, stack, output);
+                -1 -> output = output ++ [hd stack];
+                stack = tl stack;
+                convertStack(exprlst, stack, output);
+              end
+            end
+          else
+            output = output ++ [token]
+            convertStack(rest, stack, output);
+          end
+        end
+      end
+    end
